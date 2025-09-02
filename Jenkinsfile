@@ -8,26 +8,26 @@ pipeline {
   stages {
     stage('Build Backend') {
       steps {
-        sh 'mvn clean compile'
+        bat 'mvn clean compile'
       }
     }
 
     stage('Run JUnit Tests') {
       steps {
-        sh 'mvn test'
+        bat 'mvn test'
       }
     }
 
     stage('Install Playwright') {
       steps {
-        sh 'npm ci'
-        sh 'npx playwright install'
+        bat 'npm ci'
+        bat 'npx playwright install'
       }
     }
 
     stage('Run Playwright Tests') {
       steps {
-        sh 'npx playwright test'
+        bat 'npx playwright test'
       }
     }
   }
