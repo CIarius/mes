@@ -1,0 +1,23 @@
+{
+  "name": "mes",
+  "version": "1.0.0",
+  "description": "\"# mes\"",
+  "main": "index.js",
+  "scripts": {
+    "test:e2e": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CIarius/mes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CIarius/mes/issues"
+  },
+  "homepage": "https://github.com/CIarius/mes#readme",
+  "devDependencies": {
+    "playwright": "^1.55.0"
+  }
+}

@@ -1,6 +1,5 @@
 package com.clarius.mes;
 
-import org.mindrot.jbcrypt.BCrypt;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
