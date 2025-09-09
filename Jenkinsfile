@@ -28,13 +28,13 @@ pipeline {
         bat 'mvn package'
       }
     }
-/*
-     stage('Archive WAR') {
+
+    stage('Deploy to Tomcat') {
       steps {
-        archiveArtifacts artifacts: "${env.WAR_PATH}", fingerprint: true
+        bat "copy target\\mes.war C:\\apache-tomcat-9.0.108\\webapps\\mes.war"
       }
     }
-*/
+
   }
 
   post {
