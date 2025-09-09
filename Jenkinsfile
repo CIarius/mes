@@ -30,6 +30,13 @@ pipeline {
         bat 'npx playwright test'
       }
     }
+
+  stage('Deploy to Tomcat') {
+    steps {
+      bat 'copy target/myapp.war user@tomcat-host:/opt/tomcat/webapps/'
+    }
+  }
+
   }
 
   post {

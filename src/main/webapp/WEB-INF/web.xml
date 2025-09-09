@@ -6,14 +6,29 @@
 
   <display-name>Manufacturing Execution System</display-name>
 
+  <!-- LoginServlet -->
+
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.yourpackage.LoginServlet</servlet-class>
+    <servlet-class>com.mes.LoginServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+
+  <!-- DashboardServlet -->
+
+  <servlet>
+    <servlet-name>DashboardServlet</servlet-name>
+    <servlet-class>com.mes.DashboardServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DashboardServlet</servlet-name>
+    <url-pattern>/DashboardServlet</url-pattern>
+  </servlet-mapping>
+
 
 </web-app>
