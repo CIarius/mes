@@ -1,5 +1,5 @@
 pipeline {
-  
+
   agent any
 
   environment {
@@ -43,9 +43,7 @@ pipeline {
 
     stage('Deploy to Tomcat') {
       steps {
-        withCredentials([sshUserPrivateKey(credentialsId: 'tomcat-ssh-key', keyFileVariable: 'SSH_KEY')]) {
-          bat "scp -i %SSH_KEY% ${env.WAR_PATH} manager@localhost:${env.TOMCAT_DEST}"
-        }
+        bat 'scp ${env.WAR_PATH} manager@localhost:${env.TOMCAT_DEST}'
       }
     }
 
