@@ -6,6 +6,8 @@
 
   <display-name>Manufacturing Execution System</display-name>
 
+<!--   
+
   <!-- LoginServlet -->
 
   <servlet>
@@ -30,5 +32,6 @@
     <url-pattern>/dashboard</url-pattern>
   </servlet-mapping>
 
-
+ -->
+ 
 </web-app>
