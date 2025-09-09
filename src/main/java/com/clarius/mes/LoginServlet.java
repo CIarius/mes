@@ -16,8 +16,8 @@ public class LoginServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             OracleConnector.getConnection(username, password);
-            request.getSession().setAttribute("user", username);
-            response.sendRedirect("dashboard.jsp");
+            request.getSession().setAttribute("username", username);
+            response.sendRedirect("mes/dashboard.jsp");
             return;
         } catch (SQLException e) {
             response.sendRedirect("login.jsp?error=1");

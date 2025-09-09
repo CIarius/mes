@@ -3,50 +3,57 @@ pipeline {
   agent any
 
   environment {
-    NODE_ENV = 'test'
+    WAR_PATH = 'target/mes.war'
+    TOMCAT_USER = credentials('manager') // Jenkins credential ID
+    TOMCAT_URL  = 'http://localhost:8080/manager/text'
   }
 
   stages {
-    stage('Build Backend') {
-      steps {
-        bat 'mvn clean compile'
-      }
-    }
 
-    stage('Run JUnit Tests') {
+    stage('Build & Test Backend') {
       steps {
-        bat 'mvn test'
+        bat 'mvn clean verify'
       }
     }
 
     stage('Install Playwright') {
       steps {
-        bat 'npm ci'
-        bat 'npx playwright install'
+        bat 'npm ci || exit 1'
+        bat 'npx playwright install || exit 1'
       }
     }
 
     stage('Run Playwright Tests') {
       steps {
-        bat 'npx playwright test'
+        bat 'npx playwright test || exit 1'
       }
     }
+
+    stage('Package WAR') {
+      steps {
+        bat 'mvn package'
+      }
+    }
+
+/*     stage('Archive WAR') {
+      steps {
+        archiveArtifacts artifacts: "${env.WAR_PATH}", fingerprint: true
+      }
+    }
+ */
   }
 
   post {
-    always {
-      publishHTML([
-        reportDir: 'playwright-report',
-        reportFiles: 'index.html',
-        reportName: 'Playwright Test Report',
-        allowMissing: false,
-        alwaysLinkToLastBuild: true,
-        keepAll: true
-      ])
-    }
     failure {
-      echo 'Build failed due to test errors.'
+      echo '❌ Build failed. Check logs for details.'
+    }
+    success {
+      echo '✅ Build and deployment completed successfully.'
     }
   }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 989df4db47357fb86ad52233b79447ddb6747da2
 }
