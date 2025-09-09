@@ -43,7 +43,7 @@ pipeline {
 
     stage('Deploy to Tomcat') {
       steps {
-        bat '''copy C:\Users\ramcc\.jenkins\workspace\mes\target\mes.war C:\apache-tomcat-9.0.108\webapps\mes.war'''
+        bat "copy C:\\Users\\ramcc\\.jenkins\\workspace\\mes\\target\\mes.war C:\\apache-tomcat-9.0.108\\webapps\\mes.war"
       }
     }
 
