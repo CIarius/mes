@@ -33,7 +33,7 @@ pipeline {
 
     stage('Deploy to Tomcat') {
       steps {
-        bat 'scp target\myapp.war manager@localhost:/opt/tomcat/webapps/'
+        bat 'scp target/myapp.war manager@localhost:/opt/tomcat/webapps/'
       }
     }
 
