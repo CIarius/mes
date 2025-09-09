@@ -31,11 +31,11 @@ pipeline {
       }
     }
 
-  stage('Deploy to Tomcat') {
-    steps {
-      bat 'copy target/myapp.war user@tomcat-host:/opt/tomcat/webapps/'
+    stage('Deploy to Tomcat') {
+      steps {
+        bat '"C:\\Program Files\\Git\\usr\\bin\\scp.exe" target\\myapp.war user@tomcat-host:/opt/tomcat/webapps/'
+      }
     }
-  }
 
   }
 
