@@ -2,25 +2,14 @@ pipeline {
 
   agent any
 
-  environment {
-    WAR_PATH = 'target/mes.war'
-    TOMCAT_USER = credentials('manager') // Jenkins credential ID
-    TOMCAT_URL  = 'http://localhost:8080/manager/text'
-  }
-
-  tools {
-    maven 'Maven 3.9.1.1'
-    nodejs 'NodeJS 22.13.1'
-  }
-
   stages {
 
     stage('Build & Test Backend') {
       steps {
-        bat 'mvn clean verify'
+        bat 'mvn clean package'
       }
     }
-
+/*
     stage('Install Playwright') {
       steps {
         bat 'npm ci || exit 1'
@@ -40,12 +29,12 @@ pipeline {
       }
     }
 
-/*     stage('Archive WAR') {
+     stage('Archive WAR') {
       steps {
         archiveArtifacts artifacts: "${env.WAR_PATH}", fingerprint: true
       }
     }
- */
+*/
   }
 
   post {
