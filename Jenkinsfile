@@ -3,9 +3,9 @@ pipeline {
   agent any
 
   environment {
-    WAR_NAME = 'mes.war'
-    WAR_PATH = "target/${env.WAR_NAME}"
-    TOMCAT_DEST = '/opt/tomcat/webapps/'
+    WAR_PATH = 'target/mes.war'
+    TOMCAT_USER = credentials('manager') // Jenkins credential ID
+    TOMCAT_URL  = 'http://localhost:8080/manager/text'
   }
 
   stages {
@@ -43,7 +43,7 @@ pipeline {
 
     stage('Deploy to Tomcat') {
       steps {
-        bat 'scp ${env.WAR_PATH} manager@localhost:${env.TOMCAT_DEST}'
+        bat 'copy C:\Users\ramcc\.jenkins\workspace\mes\target\mes.war C:\apache-tomcat-9.0.108\webapps\mes.war'
       }
     }
 
