@@ -9,14 +9,14 @@ pipeline {
         bat 'mvn clean package'
       }
     }
-/*
+
     stage('Install Playwright') {
       steps {
         bat 'npm ci || exit 1'
         bat 'npx playwright install || exit 1'
       }
     }
-
+/*
     stage('Run Playwright Tests') {
       steps {
         bat 'npx playwright test || exit 1'
