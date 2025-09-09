@@ -51,9 +51,5 @@ pipeline {
       echo '✅ Build and deployment completed successfully.'
     }
   }
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> 989df4db47357fb86ad52233b79447ddb6747da2
 }
