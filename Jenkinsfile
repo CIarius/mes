@@ -35,12 +35,12 @@ pipeline {
       }
     }
 
-    stage('Archive WAR') {
+/*     stage('Archive WAR') {
       steps {
         archiveArtifacts artifacts: "${env.WAR_PATH}", fingerprint: true
       }
     }
-
+ */
   }
 
   post {
