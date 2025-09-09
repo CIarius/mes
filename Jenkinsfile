@@ -6,7 +6,7 @@ pipeline {
 
     stage('Build & Test Backend') {
       steps {
-        bat 'mvn clean package'
+        bat 'mvn clean verify'
       }
     }
 
@@ -22,13 +22,13 @@ pipeline {
         bat 'npx playwright test || exit 1'
       }
     }
-/*
+
     stage('Package WAR') {
       steps {
         bat 'mvn package'
       }
     }
-
+/*
      stage('Archive WAR') {
       steps {
         archiveArtifacts artifacts: "${env.WAR_PATH}", fingerprint: true
