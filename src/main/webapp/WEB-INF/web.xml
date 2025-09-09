@@ -10,7 +10,7 @@
 
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.mes.LoginServlet</servlet-class>
+    <servlet-class>com.clarius.mes.LoginServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -22,7 +22,7 @@
 
   <servlet>
     <servlet-name>DashboardServlet</servlet-name>
-    <servlet-class>com.mes.DashboardServlet</servlet-class>
+    <servlet-class>com.clarius.mes.DashboardServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
