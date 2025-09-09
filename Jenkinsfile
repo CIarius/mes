@@ -1,57 +1,63 @@
 pipeline {
+  
   agent any
 
   environment {
-    NODE_ENV = 'test'
+    WAR_NAME = 'mes.war'
+    WAR_PATH = "target/${env.WAR_NAME}"
+    TOMCAT_DEST = '/opt/tomcat/webapps/'
   }
 
   stages {
-    stage('Build Backend') {
-      steps {
-        bat 'mvn clean compile'
-      }
-    }
 
-    stage('Run JUnit Tests') {
+    stage('Build & Test Backend') {
       steps {
-        bat 'mvn test'
+        bat 'mvn clean verify'
       }
     }
 
     stage('Install Playwright') {
       steps {
-        bat 'npm ci'
-        bat 'npx playwright install'
+        bat 'npm ci || exit 1'
+        bat 'npx playwright install || exit 1'
       }
     }
 
     stage('Run Playwright Tests') {
       steps {
-        bat 'npx playwright test'
+        bat 'npx playwright test || exit 1'
+      }
+    }
+
+    stage('Package WAR') {
+      steps {
+        bat 'mvn package'
+      }
+    }
+
+    stage('Archive WAR') {
+      steps {
+        archiveArtifacts artifacts: "${env.WAR_PATH}", fingerprint: true
       }
     }
 
     stage('Deploy to Tomcat') {
       steps {
-        bat 'scp target/mes.war manager@localhost:/opt/tomcat/webapps/'
+        withCredentials([sshUserPrivateKey(credentialsId: 'tomcat-ssh-key', keyFileVariable: 'SSH_KEY')]) {
+          bat "scp -i %SSH_KEY% ${env.WAR_PATH} manager@localhost:${env.TOMCAT_DEST}"
+        }
       }
     }
 
   }
 
   post {
-    always {
-      publishHTML([
-        reportDir: 'playwright-report',
-        reportFiles: 'index.html',
-        reportName: 'Playwright Test Report',
-        allowMissing: false,
-        alwaysLinkToLastBuild: true,
-        keepAll: true
-      ])
-    }
     failure {
-      echo 'Build failed due to test errors.'
+      echo '❌ Build failed. Check logs for details.'
+    }
+    success {
+      echo '✅ Build and deployment completed successfully.'
     }
   }
+
 }
