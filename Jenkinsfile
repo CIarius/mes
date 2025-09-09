@@ -16,13 +16,13 @@ pipeline {
         bat 'npx playwright install || exit 1'
       }
     }
-/*
+
     stage('Run Playwright Tests') {
       steps {
         bat 'npx playwright test || exit 1'
       }
     }
-
+/*
     stage('Package WAR') {
       steps {
         bat 'mvn package'
