@@ -8,6 +8,11 @@ pipeline {
     TOMCAT_URL  = 'http://localhost:8080/manager/text'
   }
 
+  tools {
+    maven 'Maven 3.9.1.1'
+    nodejs 'NodeJS 22.13.1'
+  }
+
   stages {
 
     stage('Build & Test Backend') {
