@@ -33,7 +33,7 @@ pipeline {
 
     stage('Deploy to Tomcat') {
       steps {
-        bat 'copy target\mes.war C:\apache-tomcat-9.0.108\webapps\mes.war'
+        bat 'scp target\myapp.war manager@localhost:/opt/tomcat/webapps/'
       }
     }
 
