@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+
+  oracle-xe:
+    image: oracleinanutshell/oracle-xe-11g
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_ALLOW_REMOTE=true
+    networks:
+      - backend
+
+  tomcat-app:
+    build: ./tomcat
+    ports:
+      - "8080:8080"
+    depends_on:
+      - oracle-xe
+    environment:
+      - DB_HOST=oracle-xe
+    networks:
+      - backend
+
+networks:
+  backend:
