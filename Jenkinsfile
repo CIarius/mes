@@ -22,7 +22,7 @@ pipeline {
 
     stage('Deploy to Tomcat') {
       steps {
-        bat "copy target\\mes.war $CATALINA_HOME/webapps/"
+        bat "copy target\mes.war $CATALINA_HOME\webapps"
       }
     }
 
