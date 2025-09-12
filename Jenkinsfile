@@ -17,7 +17,7 @@ pipeline {
 
     stage('Copy WAR file to Docker context') {
       steps {
-        bat "copy target/mes.war docker/tomcat/webapps"
+        bat "copy target/mes.war docker/tomcat/webapps/mes.war"
       }
     }    
 
