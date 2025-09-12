@@ -20,12 +20,25 @@ pipeline {
       }
     }
 
-    stage('Deploy to Tomcat') {
+    stage('Deploy to Docker/Tomcat'){
+      steps {
+        bat "docker rm -f tomcat-docker-sandbox"  // stop running instance
+        bat '''
+        docker run -d ^
+          --name tomcat-docker-sandbox ^
+          -p 8080:8080 ^
+          -v C:/development/projects/mes/target/mes.war:/usr/local/tomcat/webapps/mes.war ^
+          tomcat:9.0
+        '''
+      }
+    }
+
+/*     stage('Deploy to Tomcat') {
       steps {
         bat "copy target\mes.war $CATALINA_HOME\webapps"
       }
     }
-
+ */
 /*     stage('Install Playwright') {
       steps {
         // bat 'npm ci || exit 1'
