@@ -11,19 +11,19 @@ pipeline {
     // skipping tests until after Docker/Tomcat is running
     stage('Build & Test Backend') {
       steps {
-        bat 'mvn clean package -DskipTests'
+        bat "mvn clean package -DskipTests"
       }
     }
 
     stage('Copy WAR file to Docker context') {
       steps {
-        bat 'copy target\mes.war docker\tomcat\webapps'
+        bat "copy target\mes.war docker\tomcat\webapps"
       }
     }    
 
     stage('Docker Compose Up') {
       steps {
-        bat 'docker-compose -f docker\docker-compose.yml up -d --build'
+        bat "docker-compose -f docker\docker-compose.yml up -d --build"
       }
     }    
 /*
@@ -62,7 +62,7 @@ pipeline {
 /*    
     stage('Run Playwright Tests') {
       steps {
-        bat 'npx playwright test || exit 1'
+        bat "npx playwright test || exit 1"
       }
     }
 */
