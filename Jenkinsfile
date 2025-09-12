@@ -11,7 +11,7 @@ pipeline {
     // skipping tests until after Docker/Tomcat is running
     stage('Build & Test Backend') {
       steps {
-        bat 'mvn clean package -DskipTest'
+        bat 'mvn clean package -DskipTests'
       }
     }
 
