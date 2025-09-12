@@ -17,13 +17,13 @@ pipeline {
 
     stage('Copy WAR file to Docker context') {
       steps {
-        sh 'cp target/mes.war docker/tomcat/webapps/'
+        bat 'cp target/mes.war docker/tomcat/webapps/'
       }
     }    
 
     stage('Docker Compose Up') {
       steps {
-        sh 'docker-compose -f docker/docker-compose.yml up -d --build'
+        bat 'docker-compose -f docker/docker-compose.yml up -d --build'
       }
     }    
 /*
