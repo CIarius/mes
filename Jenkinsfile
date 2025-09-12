@@ -14,6 +14,18 @@ pipeline {
       }
     }
 
+    stage('Copy WAR file to Docker context') {
+      steps {
+        sh 'cp target/mes.war docker/tomcat/webapps/'
+      }
+    }    
+
+    stage('Docker Compose Up') {
+      steps {
+        sh 'docker-compose -f docker/docker-compose.yml up -d --build'
+      }
+    }    
+/*
     stage('Deploy to Docker/Tomcat'){
       steps {
         bat "docker rm -f tomcat-docker-sandbox"  // stop running instance
@@ -26,7 +38,7 @@ pipeline {
         '''
       }
     }
-
+*/
 /*     stage('Deploy to Tomcat') {
       steps {
         bat "copy target\mes.war $CATALINA_HOME\webapps"
