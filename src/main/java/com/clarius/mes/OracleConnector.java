@@ -9,7 +9,8 @@ public class OracleConnector {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        String url = "jdbc:oracle:thin:@//localhost:1521/XEPDB1";
+        String url = "jdbc:oracle:thin:@oracle-xe:1521:XEPDB1";
+        //String url = "jdbc:oracle:thin:@//localhost:1521/XEPDB1";
         return DriverManager.getConnection(url, username, password);
     }
 }
