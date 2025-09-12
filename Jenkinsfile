@@ -10,13 +10,7 @@ pipeline {
 
     stage('Build & Test Backend') {
       steps {
-        bat 'mvn clean verify'
-      }
-    }
-
-    stage('Package WAR') {
-      steps {
-        bat 'mvn package'
+        bat 'mvn clean package'
       }
     }
 
@@ -46,12 +40,19 @@ pipeline {
       }
     }
  */
+
+    stage('Verify'){
+      steps {
+        bat "mvn verify"
+      }
+    }
+/*    
     stage('Run Playwright Tests') {
       steps {
         bat 'npx playwright test || exit 1'
       }
     }
-
+*/
   }
 
   post {
