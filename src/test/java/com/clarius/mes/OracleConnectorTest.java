@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class OracleConnectorTest {
 
-    private static final String VALID_USERNAME = "mes";
-    private static final String VALID_PASSWORD = "admin";
-    private static final String INVALID_PASSWORD = "ADMIN";
+    private static final String VALID_USERNAME = "admin";
+    private static final String VALID_PASSWORD = "sunderland";
+    private static final String INVALID_PASSWORD = "SUNDERLAND";
 
     @Test
     void testValidConnection() {
