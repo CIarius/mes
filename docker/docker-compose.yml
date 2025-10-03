@@ -1,24 +1,39 @@
 services:
-
-  oracle-xe:
-    image: oracleinanutshell/oracle-xe-11g
+  oracle:
+    image: gvenzl/oracle-free:latest
+    container_name: oracle
+    environment:
+      ORACLE_PASSWORD: oracle
+      ORACLE_DATABASE: mes
+      APP_USER: admin
+      APP_USER_PASSWORD: sunderland
     ports:
       - "1521:1521"
-    environment:
-      - ORACLE_ALLOW_REMOTE=true
+    volumes:
+      - ../oracle/scripts:/opt/oracle/scripts
+      - ../oracle/scripts/data:/opt/oracle/scripts/data
+      - ../oracle/init:/container-entrypoint-startdb.d
     networks:
       - backend
-
-  tomcat-app:
-    build: ./tomcat
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo 'exit' | sqlplus -s system/oracle@localhost:1521/mes"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+  tomcat:
+    image: tomcat:latest
+    container_name: tomcat
     ports:
       - "8080:8080"
     depends_on:
-      - oracle-xe
-    environment:
-      - DB_HOST=oracle-xe
+      oracle:
+        condition: service_healthy
     networks:
-      - backend
+      - backend        
+    command:
+      # commands are ran upon container start up but Oracle needs time to initialise so move them here
+      # - bash -c "sqlplus admin/sunderland@localhost:1521/mes @/opt/oracle/custom-scripts/schema.sql"
+      # - bash -c "sqlplus admin/sunderland@localhost:1521/mes @/opt/oracle/custom-scripts/employees.sql"
 
 networks:
   backend:

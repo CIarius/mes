@@ -1,4 +1,16 @@
 -------------------------------------------------------------------------------
 Test set: com.clarius.mes.OracleConnectorTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.378 s -- in com.clarius.mes.OracleConnectorTest
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.716 s <<< FAILURE! -- in com.clarius.mes.OracleConnectorTest
+com.clarius.mes.OracleConnectorTest.testValidConnection -- Time elapsed: 0.025 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Should not throw SQLException for valid credentials: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+ 
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:38)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:134)
+	at com.clarius.mes.OracleConnectorTest.testValidConnection(OracleConnectorTest.java:21)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
