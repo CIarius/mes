@@ -53,6 +53,27 @@ pipeline {
       }
     }
  */
+    stage('Wait for Oracle') {
+      steps {
+        script {
+          def maxRetries = 20
+          def retries = 0
+          while (retries < maxRetries) {
+            def status = sh(script: "docker inspect -f '{{.State.Health.Status}}' oracle", returnStdout: true).trim()
+            if (status == 'healthy') {
+              echo "Oracle is healthy"
+              break
+            }
+            echo "Waiting for Oracle to be healthy..."
+            sleep(time: 10, unit: 'SECONDS')
+            retries++
+          }
+          if (retries == maxRetries) {
+            error "Oracle did not become healthy in time"
+          }
+        }
+      }
+    }
 
     stage('Verify'){
       steps {

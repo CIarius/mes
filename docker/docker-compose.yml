@@ -33,6 +33,7 @@ services:
     command:
       # commands are ran upon container start up but Oracle needs time to initialise so move them here
       # - bash -c "sqlplus admin/sunderland@localhost:1521/mes @/opt/oracle/custom-scripts/schema.sql"
+      ["bash", "-c", "sqlplus admin/sunderland@localhost:1521/mes @/opt/oracle/custom-scripts/schema.sql"]
       # - bash -c "sqlplus admin/sunderland@localhost:1521/mes @/opt/oracle/custom-scripts/employees.sql"
 
 networks:
